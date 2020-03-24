@@ -1,0 +1,27 @@
+<link href="https://fonts.googleapis.com/css?family=Barlow|Karla&display=swap" rel="stylesheet">
+<h1>List of People</h1>
+<div class="center-content">
+    <table>
+        <thead>
+            <tr class="table-header">
+                <th>Id</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Sex</th>
+                <th>Pulsations</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let person of people">
+            <tr class="person-cell" (click)="goTo(person)">
+                <td>{{person.id}}</td>
+                <td>{{person.name}}</td>
+                <td>{{person.age}}</td>
+                <td>{{person.sex}}</td>
+                <td>{{person.pulsations}}</td>
+                <td><button class="red-light-button">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<button class="red-button">Delete all</button>

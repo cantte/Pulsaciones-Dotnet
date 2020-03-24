@@ -1,0 +1,40 @@
+<div class="center-content">
+    <div *ngIf="person; else notFound">
+        <h1>Details about {{person.name}}</h1>
+        <div class="center-content">
+            <div class="person-detail">
+                <div class="row">
+                    <div class="label">
+                        <span>Id:</span>
+                    </div>
+                    <div class="info">
+                        <span>{{ person.id }}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <span class="label">Name:</span>
+                    <span class="info">{{ person.name }}</span>
+                </div>
+                <div class="row">
+                    <span class="label">Age:</span>
+                    <span class="info">{{ person.age }}</span>
+                </div>
+                <div class="row">
+                    <span class="label">Sex:</span>
+                    <span class="info">{{ person.sex }}</span>
+                </div>
+                <div class="row">
+                    <span class="label">Pulsations:</span>
+                    <span class="info">{{ person.pulsations }}</span>
+                </div>
+                <div class="center-content">
+                    <button (click)="goBack()">Go back</button>
+                    <button>Edit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-template #notFound>
+        <h1 style="margin-top: 15%;">Not found person. Try register.</h1>
+    </ng-template>
+</div>

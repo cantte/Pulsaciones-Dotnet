@@ -1,0 +1,168 @@
+a {
+    text-decoration: none;
+}
+
+input {
+    box-sizing: border-box;
+    display: inline-block;
+    cursor: text;
+    height: 25px;
+    width: 60%;
+    font-size: 15px;
+    font-family: 'Nunito';
+    padding: 0px 20px 0px 27px;
+    background: white url("http://cssdeck.com/uploads/media/items/5/5JuDgOa.png") 10px 7px no-repeat;
+    border: none;
+    border-radius: 15px;
+    margin-right: 5px;
+    box-shadow: inset 0 1px #E5E7ED, 0 1px 0 #FCFCFC;
+    transition: width 300ms;
+}
+
+input:focus {
+    outline: none;
+    border-color: aquamarine;
+    box-shadow: 0 0 2px rgba(85, 168, 236, 0.9);
+    width: 80%;
+}
+
+input:focus + .search-results, .search-box .search-results:hover {
+    display: block;
+}
+
+button.search-button {
+    display: inline-block;
+    font-family: 'Nunito';
+    height: 25px;
+    width: auto;
+    padding: 0% 2%;
+    background-color: rgb(50, 150, 255);
+    border: none;
+    margin: 0px;
+    border-radius: 3px;
+}
+
+button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+}
+
+.small-alt {
+    height: 100%;
+    font-size: small;
+    vertical-align: middle;
+    color: white;
+}
+
+.search-box {
+    position: relative;
+    margin: 0 auto;
+    width: 300px;
+}
+
+.search-box .search-results {
+    display: none;
+    position: absolute;
+    top: 35px;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: 3px;
+    background-color: #FDFDFD;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-box .search-results li {
+    display: block;
+}
+
+.search-box .search-results li:first-child {
+    margin-top: -1px;
+}
+
+.search-box .search-results li:first-child::before, .search-box .search-results li:first-child::after {
+    display: block;
+    content: '';
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: 40%;
+    margin-left: -5px;
+    border: 5px outset transparent;
+}
+
+.search-box .search-results li:first-child::before {
+    border-bottom: 5px solid #C4C7D7;
+    top: -11px;
+}
+
+.search-box .search-results li:first-child::after {
+    border-bottom: 5px solid #FDFDFD;
+    top: -10px;
+}
+
+.search-box .search-results li:first-child:hover::before, .search-box .search-results li:first:hover::after {
+    display: none;
+}
+
+.search-box .search-results li:last-child {
+    margin-bottom: -1px;
+}
+
+.search-box .search-results a {
+    display: block;
+    position: relative;
+    margin: 0 -1px;
+    padding: 6px 40px 6px 10px;
+    color: #808394;
+    font-weight: 300;
+    font-family: 'Nunito';
+    text-shadow: 0 1px #FFF;
+    border: 1px solid transparent;
+    border-radius: 3px;
+}
+
+.search-box .search-results a span {
+    font-weight: 100;
+}
+
+.search-box .search-results a::before {
+    content: '';
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    margin-top: -9px;
+}
+
+.search-box .search-results a:hover {
+    text-decoration: none;
+    color: #FFF;
+    text-shadow: 0 -1px rgba(0, 0, 0, 0.3);
+    border-color: #2380DD;
+    background-color: #338CDF;
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.2), 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.search-result li:hover {
+    background-color: #607D8B;
+}
+
+.search-result li a {
+    color: #888;
+    display: block;
+    text-decoration: none;
+    position: relative;
+}
+
+.search-result li a:hover {
+    color: white;
+}
+
+.search-result li a:active {
+    color: white;
+}

@@ -1,0 +1,13 @@
+<h3>Last registered people</h3>
+<div class="center-content">
+    <div class="last-people">
+        <a *ngFor="let person of people" routerLink="/person/{{person.id}}">
+            <div class="last-person right_to_left">
+                <h4>{{ person.id }} - {{ person.name }}</h4>
+            </div>
+        </a>
+    </div>
+</div>
+<br>
+<br>
+
