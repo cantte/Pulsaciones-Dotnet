@@ -19,7 +19,9 @@ export class PersonResgisterComponent implements OnInit {
   savePerson(): void
   {
     this.person.CalculatePulsations();
-    this.personService.savePerson(this.person);
+    this.personService.post(this.person).subscribe(serverResponse => {
+      console.log(serverResponse);
+    });
   }
 
   calculatePulsations(): void
