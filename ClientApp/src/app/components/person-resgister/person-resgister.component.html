@@ -1,35 +1,41 @@
 <link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet">
 <h1>Form of register person</h1>
 <div class="center-content">
-    <form> 
+    <form [formGroup]="personForm" (ngSubmit)="onSubmit()" style="width: 70%;"> 
         <div class="form-element center-content">
             <label for="id">Id</label>
-            <input type="text" name="id" id="id" class="form-input" [(ngModel)]="person.id">
+            <input type="text" name="id" id="id" class="form-input" formControlName="personId">
             <small class="form-help">Please enter your id.</small>
         </div>
         <div class="form-element">
             <label for="name">Name</label>
-            <input type="text" name="name" id="name" class="form-input" [(ngModel)]="person.name">
+            <input type="text" name="name" id="name" class="form-input" formControlName="personName">
             <small class="form-help">Please enter your complete name.</small>
         </div>
         <div class="form-element">
             <label for="age">Age</label>
-            <input type="number" name="age" id="age" class="form-input" [(ngModel)]="person.age">
+            <input type="number" name="age" id="age" class="form-input" formControlName="personAge">
             <small class="form-help">Please enter your age. Values between 1 and 100.</small>
         </div>
         <div class="form-check">
             <label><span>Sex:</span>
-                <label><input type="radio" name="sex" id="sex" class="fixed-radio" value="F" [(ngModel)]="person.sex">Female</label>
-                <label><input type="radio" name="sex" id="sex" class="fixed-radio" value="M" [(ngModel)]="person.sex">Male</label>
+                <label><input type="radio" name="sex" id="sex" formControlName="personSex" value="F">Female</label>
+                <label><input type="radio" name="sex" id="sex" formControlName="personSex" value="M">Male</label>
             </label>
             <small class="form-help">Please select a sex.</small>
         </div>
         <div class="form-element">
-            <span>Pulsations: {{ person.pulsations }}</span> 
+            <span>Pulsations: 0</span> 
         </div>
         <div class="center-content">
-            <button class="blue-button" (click)="calculatePulsations()">Calculate Pulsations</button>
-            <button type="submit" class="blue-button" (click)="savePerson()">Register person</button>
+            <button type="submit" class="dodger_blue">Register person</button>
+        </div>
+        <div class="center-content" *ngIf="invalidForm">
+            <div class="information-block error-block">
+                <span class="message">
+                    Please fill required fields.
+                </span>
+            </div>
         </div>
     </form>
 </div>

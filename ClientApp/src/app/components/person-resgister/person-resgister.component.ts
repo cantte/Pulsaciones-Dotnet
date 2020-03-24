@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Person } from 'src/app/models/person';
 import { PersonService } from 'src/app/services/person.service';
 
@@ -9,22 +10,40 @@ import { PersonService } from 'src/app/services/person.service';
 })
 export class PersonResgisterComponent implements OnInit {
 
-  person: Person = new Person();
+  personForm: FormGroup;
+  invalidForm: boolean;
 
   constructor(private personService: PersonService) { }
 
   ngOnInit(): void {
+    this.personForm = this.createFormGroup();
   }
 
-  savePerson(): void
-  {
-    this.person.CalculatePulsations();
-    this.personService.savePerson(this.person);
+  createFormGroup() {
+    return new FormGroup({
+      personId: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      personName: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      personAge: new FormControl('', [Validators.required, Validators.max(100), Validators.min(1)]),
+      personSex: new FormControl('', [Validators.required])
+    })
   }
 
-  calculatePulsations(): void
-  {
-    this.person.CalculatePulsations();
+  onSubmit() {
+    if (this.personForm.valid) {
+        let person: Person = new Person();
+        person.personId = this.personForm.value.personId;
+        person.name = this.personForm.value.personName;
+        person.age = +this.personForm.value.personAge;
+        person.sex = this.personForm.value.personSex;
+        person.CalculatePulsations();
+        this.personService.savePerson(person);
+        this.onResetForm();
+    }
+    else this.invalidForm = true;
   }
 
+  onResetForm() {
+    this.personForm.reset();
+    this.invalidForm = false;
+  }
 }
