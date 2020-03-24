@@ -28,7 +28,7 @@ export class PeopleComponent implements OnInit {
 
   goTo(person: Person): void
   {
-    this.router.navigateByUrl(`person/${person.id}`);
+    this.router.navigateByUrl(`person/${person.personId}`);
   }
 
 }

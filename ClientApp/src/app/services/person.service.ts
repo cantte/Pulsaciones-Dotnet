@@ -59,7 +59,7 @@ export class PersonService {
     let people: Person[] = this.getPeople();
 
     if (people)
-      return people.find(person => person.id == id);
+      return people.find(person => person.personId == id);
     else return null;
   }
 
@@ -73,6 +73,6 @@ export class PersonService {
     if (!term.trim()) return [];
 
     let people: Person[] = this.getPeople();
-    return people.filter(person => person.id.includes(term));
+    return people.filter(person => person.personId.includes(term));
   }
 }
