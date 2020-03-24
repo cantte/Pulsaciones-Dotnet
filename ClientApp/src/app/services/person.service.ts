@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { HandleHttpErrorService } from '../@base/handle-http-error.service';
 import { Observable } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
+import { ServerResponse } from '../@base/server-response';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -27,11 +28,11 @@ export class PersonService {
     this.baseUrl = baseUrl;
   }
 
-  post(person: Person): Observable<Person> {
-    return this.http.post<Person>(this.baseUrl + 'api/People/Add', person, httpOptions)
+  post(person: Person): Observable<ServerResponse> {
+    return this.http.post<ServerResponse>(this.baseUrl + 'api/People/Add', person, httpOptions)
       .pipe(
         tap(_ => this.handleHttpError.log('Datos guardados')),
-        catchError(this.handleHttpError.handleError<Person>('savePerson', null))
+        catchError(this.handleHttpError.handleError<ServerResponse>('savePerson', null))
       );
   }
 
