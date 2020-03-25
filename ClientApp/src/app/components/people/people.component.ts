@@ -23,7 +23,7 @@ export class PeopleComponent implements OnInit {
 
   getPeople(): void 
   {
-    this.people = this.personService.getPeople();
+    this.personService.get().subscribe(people => this.people = people);
   }
 
   goTo(person: Person): void

@@ -21,7 +21,9 @@ export class PeopleHistoryComponent implements OnInit {
 
   loadHistory(): void
   {
-    this.people = this.personService.getPeople().slice(0, 5);
+    this.personService.get().subscribe(people => {
+      this.people = people.slice(0, 5);
+    });
   }
 
 }

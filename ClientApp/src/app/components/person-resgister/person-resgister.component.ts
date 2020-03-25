@@ -36,7 +36,7 @@ export class PersonResgisterComponent implements OnInit {
         person.age = +this.personForm.value.personAge;
         person.sex = this.personForm.value.personSex;
         person.CalculatePulsations();
-        this.personService.savePerson(person);
+        this.personService.post(person).subscribe(serverResponse => console.log(serverResponse));
         this.onResetForm();
     }
     else this.invalidForm = true;
