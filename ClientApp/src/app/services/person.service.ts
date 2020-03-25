@@ -44,35 +44,19 @@ export class PersonService {
       );
   }
 
-  savePerson(person: Person): void
-  {
-    let people: Person[] = this.getPeople();
+  getPerson(id: string): Observable<Person> {
+    return this.http.get<Person>(this.baseUrl + `api/People/Person/${id}`)
+      .pipe(
+        tap(_ => this.handleHttpError.log('Datos recividos')),
+        catchError(this.handleHttpError.handleError<Person>('searchPerson', null))
+      );
+  };
 
-    if (!people) people = [];
-
-    people.push(person);
-    localStorage.setItem('people', JSON.stringify(people));
-  }
-
-  getPerson(id: string): Person
-  {
-    let people: Person[] = this.getPeople();
-
-    if (people)
-      return people.find(person => person.personId == id);
-    else return null;
-  }
-
-  getPeople(): Person[] 
-  {
-    return JSON.parse(localStorage.getItem('people'));
-  }
-
-  searchPeople(term: string): Person[]
-  {
-    if (!term.trim()) return [];
-
-    let people: Person[] = this.getPeople();
-    return people.filter(person => person.personId.includes(term));
+  searchPeople(term: string): Observable<Person[]> {
+    return this.http.get<Person[]>(this.baseUrl + `api/People/People?=${term}`)
+      .pipe(
+        tap(_ => this.handleHttpError.log('Datos recividos')),
+        catchError(this.handleHttpError.handleError<Person[]>('searchPeople', []))
+      );
   }
 }
