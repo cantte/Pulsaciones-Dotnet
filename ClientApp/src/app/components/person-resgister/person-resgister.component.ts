@@ -12,6 +12,7 @@ export class PersonResgisterComponent implements OnInit {
 
   personForm: FormGroup;
   invalidForm: boolean;
+  pulsations: number = 0;
 
   constructor(private personService: PersonService) { }
 
@@ -45,5 +46,15 @@ export class PersonResgisterComponent implements OnInit {
   onResetForm() {
     this.personForm.reset();
     this.invalidForm = false;
+  }
+
+  calculatePulsations() {
+    if (this.personForm.controls['personAge'].valid && this.personForm.controls['personSex'].valid) {
+      let sex = this.personForm.controls['personSex'].value;
+      let age = +this.personForm.controls['personAge'].value;
+      this.pulsations = (sex == "F") ? ((210 - age) / 10) : ((220 - age) / 10);
+      this.invalidForm = false;
+    }
+    else this.invalidForm = true;
   }
 }
