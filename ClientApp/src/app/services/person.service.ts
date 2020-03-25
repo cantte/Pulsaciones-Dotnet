@@ -53,7 +53,7 @@ export class PersonService {
   };
 
   searchPeople(term: string): Observable<Person[]> {
-    return this.http.get<Person[]>(this.baseUrl + `api/People/People?=${term}`)
+    return this.http.get<Person[]>(this.baseUrl + `api/People/SearchPeople?personId=${term}`)
       .pipe(
         tap(_ => this.handleHttpError.log('Datos recividos')),
         catchError(this.handleHttpError.handleError<Person[]>('searchPeople', []))
