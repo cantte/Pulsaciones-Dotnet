@@ -68,5 +68,50 @@ namespace Pulsaciones_dotnetV2.Controllers
 
             return people;
         }
+
+        [HttpGet("[action]")]
+        public IEnumerable<PersonViewModel> SearchPeople([FromQuery] string personId)
+        {
+            List<PersonViewModel> people = (from p in dbContext.People
+                                            where p.PersonId.Contains(personId)
+                                            select new PersonViewModel()
+                                            {
+                                                Id = p.Id,
+                                                PersonId = p.PersonId,
+                                                Name = p.Name,
+                                                Age = p.Age,
+                                                Sex = p.Sex,
+                                                Pulsations = p.Pulsations
+                                            }).ToList();
+
+            return people;
+        }
+
+        [HttpGet("[action]/{personId}")]
+        public PersonViewModel Person(string personId)
+        {
+            PersonViewModel person;
+
+            try
+            {
+                person = (from p in dbContext.People
+                          where p.PersonId == personId
+                          select new PersonViewModel
+                          {
+                              Id = p.Id,
+                              PersonId = p.PersonId,
+                              Name = p.Name,
+                              Age = p.Age,
+                              Sex = p.Sex,
+                              Pulsations = p.Pulsations
+                          }).First();
+            }
+            catch (Exception)
+            {
+                person = null;
+            }
+
+            return person;
+        }
     }
 }
