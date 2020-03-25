@@ -29,6 +29,10 @@ body::-webkit-scrollbar {
   width: 0%;
 }
 
+a {
+  text-decoration: none;
+}
+
 .center-content {
   display: flex;
   justify-content: center;
@@ -163,6 +167,238 @@ form {
 span {
   font-size: 15px;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.right_content {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.nav-menu {
+  display: flex;
+  margin-bottom: 10px;
+  width: 100%;
+  height: 50px;
+  padding: 0% 2%;
+  box-shadow: 0px 1.5px 2px rgba(0, 0, 0, 0.5);
+}
+
+.menu > div {
+  flex: 1;
+}
+
+.menu li {
+  display: inline-block;
+  height: auto;
+  margin-right: 5px;
+  transition: border-radius .5s, background-color .2s;
+}
+
+.menu a {
+  display: block;
+  height: 50px;
+  padding: 15px 10px 0px 10px;
+  font: 400 18px Arial;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+}
+
+.menu li.active {
+  background-color: #2062E8;
+}
+
+.nav-menu.dodger_blue .menu li:hover {
+  background-color: #2062E8;
+}
+
+.menu-options > li {
+  position: relative;
+  display: inline-block;
+}
+
+.menu-options li {
+  display: inline-block;
+}
+
+.menu-options li > ul {
+    display: none;
+    position: absolute;
+    top: 50px;
+    left: 0px;
+    margin: 0;
+    min-width: 200px;
+    list-style: none;
+    z-index: 999;
+}
+
+.menu-options li > ul > li {
+    background-color: #168FFF;
+    display: block;
+    padding-top: 5px;
+    margin: 0;
+}
+
+.menu-options li > ul > li:last-child {
+    border-radius: 0px 0px 5px 5px;
+}
+
+.menu-options li > ul > li a {
+    width: 100%;
+}
+
+.menu-options li:hover ul {
+    display: block;
+}
+
+.search-box {
+  padding-top: 10px;
+  display: inline-block;
+  position: relative;
+  margin: 0 auto;
+  width: 300px;
+}
+
+.search-input {
+  cursor: text;
+  height: 25px;
+  width: 200px;
+  font-size: 15px;
+  font-family: 'Nunito';
+  padding-left: 25px;
+  background: white url("http://cssdeck.com/uploads/media/items/5/5JuDgOa.png") 10px 7px no-repeat;
+  border: none;
+  border-radius: 15px;
+  margin-right: 2px;
+  box-shadow: inset 0 1px #E5E7ED, 0 1px 0 #FCFCFC;
+}
+
+.search-box .search-results {
+  display: none;
+  position: absolute;
+  top: 45px;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 3px;
+  background-color: #FDFDFD;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-box .search-results li {
+    display: block;
+}
+
+.search-button {
+  display: inline-block;
+  font-family: Arial, Helvetica, sans-serif;
+  height: auto;
+  padding: 2px;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-top: 0px;
+}
+
+.small-text {
+  height: 100%;
+  font-size: small;
+  vertical-align: middle;
+  color: white;
+}
+
+.search-box .search-results li:first-child {
+  margin-top: -1px;
+}
+
+.search-box .search-results li:first-child::before, .search-box .search-results li:first-child::after {
+    display: block;
+    content: '';
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: 40%;
+    margin-left: -5px;
+    border: 5px outset transparent;
+}
+
+.search-box .search-results li:first-child::before {
+    border-bottom: 5px solid #C4C7D7;
+    top: -11px;
+}
+
+.search-box .search-results li:first-child::after {
+    border-bottom: 5px solid #FDFDFD;
+    top: -10px;
+}
+
+.search-box .search-results li:first-child:hover::before, .search-box .search-results li:first:hover::after {
+    display: none;
+}
+
+.search-box .search-results li:last-child {
+  margin-bottom: -1px;
+}
+
+.search-box .search-results a {
+  display: block;
+  position: relative;
+  margin: 0 -1px;
+  padding: 6px 40px 6px 10px;
+  color: #808394;
+  font-weight: 300;
+  font-family: 'Nunito';
+  text-shadow: 0 1px #FFF;
+  border: 1px solid transparent;
+  border-radius: 3px;
+}
+
+.search-box .search-results a span {
+    font-weight: 100;
+}
+
+.search-box .search-results a::before {
+    content: '';
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    margin-top: -9px;
+}
+
+.search-box .search-results a:hover {
+    text-decoration: none;
+    color: #FFF;
+    text-shadow: 0 -1px rgba(0, 0, 0, 0.3);
+    border-color: #2380DD;
+    background-color: #338CDF;
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.2), 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.search-result li:hover {
+  background-color: #607D8B;
+}
+
+.search-result li a {
+  color: #888;
+  display: block;
+  text-decoration: none;
+  position: relative;
+}
+
+.search-result li a:hover {
+    color: white;
+}
+
+.search-result li a:active {
+    color: white;
+}
+
+input:focus + .search-results, .search-box .search-results:hover {
+  display: block;
 }
 
 .form-element {
