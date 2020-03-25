@@ -1,13 +1,12 @@
 <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
 <div class="search-box">
-    <input #searchBox id="searchBox" type="text" placeholder="Search a person..." (input)="searchPerson(searchBox.value)">
-    <ul class="search-results">
-        <li *ngFor="let person of people$ | async">
-            <a routerLink="/person/{{person.id}}" (click)="searchBox.value=''">
-                {{person.id}} - {{person.name}}
-            </a>
-        </li>
-    </ul>
-    <button class="search-button" (click)="searchPersonDetails(searchBox.value); searchBox.value = ''"><span class="small-alt">Search</span></button>
+  <input #searchBox id="searchBox" type="text" class="search-input" placeholder="Search a person..." (input)="searchPerson(searchBox.value)">
+  <ul class="search-results">
+    <li *ngFor="let person of people$ | async">
+      <a routerLink="/person/{{person.personId}}" (click)="searchBox.value=''">
+        {{person.personId}} - {{person.name}}
+      </a>
+    </li>
+  </ul>
+  <button class="search-button royal_azure" (click)="searchPersonDetails(searchBox.value); searchBox.value = ''"><span class="small-text">Search</span></button>
 </div>
-
