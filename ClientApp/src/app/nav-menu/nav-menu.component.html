@@ -1,15 +1,15 @@
 <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-<div class="menu-header">
-  <nav class="main-menu">
-      <div class="menu">
-          <ul>
-              <li><a routerLink="/">Home</a></li>
-              <li><a routerLink="register">Register person</a></li>
-              <li><a routerLink="people">People</a></li>
-          </ul>
-      </div>
+<div class="nav-menu dodger_blue">
+  <nav class="menu">
+    <div>
+      <ul class="menu-options">
+        <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"><a routerLink="/">Home</a></li>
+        <li [routerLinkActive]="['active']"><a routerLink="register">Register person</a></li>
+        <li [routerLinkActive]="['active']"><a routerLink="people">People</a></li>
+      </ul>
+    </div>
   </nav>
-  <div class="search">
-      <app-person-search></app-person-search>
+  <div class="right_content">
+    <app-person-search></app-person-search>
   </div>
 </div>
