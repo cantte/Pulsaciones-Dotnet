@@ -17,17 +17,19 @@
             <input type="number" name="age" id="age" class="form-input" formControlName="personAge">
             <small class="form-help">Please enter your age. Values between 1 and 100.</small>
         </div>
-        <div class="form-check">
-            <label><span>Sex:</span>
-                <label><input type="radio" name="sex" id="sex" formControlName="personSex" value="F">Female</label>
-                <label><input type="radio" name="sex" id="sex" formControlName="personSex" value="M">Male</label>
+        <div class="form-element form-check">
+            <label><span style="margin-right: 10px;">Sex:</span>
+                <input type="radio" name="sex" id="female" value="F" class="form-check" formControlName="personSex">
+                <label for="female">Female</label>
+                <input type="radio" name="sex" id="male" value="M" class="form-check" formControlName="personSex">
+                <label for="male">Male</label>
             </label>
-            <small class="form-help">Please select a sex.</small>
         </div>
         <div class="form-element">
-            <span>Pulsations: 0</span> 
+            <span>Pulsations: {{ pulsations }}</span> 
         </div>
         <div class="center-content">
+            <button type="button" class="dodger_blue" (click)="calculatePulsations()">Calculate pulsation</button>
             <button type="submit" class="dodger_blue">Register person</button>
         </div>
         <div class="center-content" *ngIf="invalidForm">
