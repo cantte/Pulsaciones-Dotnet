@@ -611,7 +611,7 @@ input[type="password"].form-input {
   width: auto;
   padding: 10px;
   text-align: center;
-  animation: fade 1.5s;
+  animation: fade 1s ease-in;
   border-radius: 5px;
   border: 1px solid #728972;
   background-color: rgba(191, 191, 191, 0.5);
