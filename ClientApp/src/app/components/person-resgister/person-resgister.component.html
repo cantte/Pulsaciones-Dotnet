@@ -32,11 +32,14 @@
             <button type="button" class="dodger_blue" (click)="calculatePulsations()">Calculate pulsation</button>
             <button type="submit" class="dodger_blue">Register person</button>
         </div>
-        <div class="center-content" *ngIf="invalidForm">
-            <div class="information-block error-block">
+        <div class="center-content">
+            <div class="information-block error-block" *ngIf="invalidForm">
                 <span class="message">
                     Please fill required fields.
                 </span>
+            </div>
+            <div class="information-block" [class.warning-block]="serverResponse.success == false" [class.success-block]="serverResponse.success == true" *ngIf="serverResponse">
+                <span class="message">{{ serverResponse.message }}</span>
             </div>
         </div>
     </form>

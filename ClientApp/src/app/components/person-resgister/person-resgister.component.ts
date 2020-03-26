@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Person } from 'src/app/models/person';
 import { PersonService } from 'src/app/services/person.service';
+import { ServerResponse } from 'src/app/@base/server-response';
 
 @Component({
   selector: 'app-person-resgister',
@@ -12,6 +13,7 @@ export class PersonResgisterComponent implements OnInit {
 
   personForm: FormGroup;
   invalidForm: boolean;
+  serverResponse: ServerResponse = null;
   pulsations: number = 0;
 
   constructor(private personService: PersonService) { }
@@ -37,8 +39,16 @@ export class PersonResgisterComponent implements OnInit {
         person.age = +this.personForm.value.personAge;
         person.sex = this.personForm.value.personSex;
         person.CalculatePulsations();
-        this.personService.post(person).subscribe(serverResponse => console.log(serverResponse));
-        this.onResetForm();
+        this.personService.post(person).subscribe(serverResponse => {
+          this.serverResponse = serverResponse;
+
+          if (this.serverResponse.success == true)
+              this.onResetForm();
+              
+          setTimeout(() => {
+            this.serverResponse = null;
+          }, 3000);
+        });
     }
     else this.invalidForm = true;
   }
