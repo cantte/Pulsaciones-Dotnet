@@ -1,17 +1,22 @@
-﻿using System;
+﻿using Pulsaciones_dotnetV2.Models.InputModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Pulsaciones_dotnetV2.Models.ViewModels
 {
-    public class PersonViewModel
+    public class PersonViewModel : PersonInputModel
     {
-        public int Id { get; set; }
-        public string PersonId { get; set; }
-        public string Name { get; set; }
-        public int Age { get; set; }
-        public string Sex { get; set; }
+        public PersonViewModel(Person person)
+        {
+            PersonId = person.PersonId;
+            Name = person.Name;
+            Age = person.Age;
+            Sex = person.Sex;
+            Pulsations = person.Pulsations;
+        }
+
         public float Pulsations { get; set; }
     }
 }
