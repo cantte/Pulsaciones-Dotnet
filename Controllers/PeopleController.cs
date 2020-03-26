@@ -5,15 +5,17 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Pulsaciones_dotnetV2.Data;
 using Pulsaciones_dotnetV2.Models;
+using Pulsaciones_dotnetV2.Models.InputModels;
 using Pulsaciones_dotnetV2.Models.Response;
 using Pulsaciones_dotnetV2.Models.ViewModels;
 
 namespace Pulsaciones_dotnetV2.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
     public class PeopleController : Controller
     {
-        public ApplicationDbContext dbContext { get; set; }
+        private readonly ApplicationDbContext dbContext;
 
         public PeopleController(ApplicationDbContext context)
         {
@@ -21,7 +23,7 @@ namespace Pulsaciones_dotnetV2.Controllers
         }
 
         [HttpPost("[action]")]
-        public ServerResponse Add([FromBody] PersonViewModel model)
+        public ServerResponse Insert([FromBody] PersonInputModel model)
         {
             ServerResponse serverResponse = new ServerResponse();
 
@@ -54,15 +56,7 @@ namespace Pulsaciones_dotnetV2.Controllers
         public IEnumerable<PersonViewModel> People()
         {
             List<PersonViewModel> people = (from p in dbContext.People
-                                            select new PersonViewModel
-                                            {
-                                                Id = p.Id,
-                                                PersonId = p.PersonId,
-                                                Name = p.Name,
-                                                Age = p.Age,
-                                                Sex = p.Sex,
-                                                Pulsations = p.Pulsations
-                                            }).ToList();
+                                            select new PersonViewModel(p)).ToList();
 
 
 
@@ -74,15 +68,7 @@ namespace Pulsaciones_dotnetV2.Controllers
         {
             List<PersonViewModel> people = (from p in dbContext.People
                                             where p.PersonId.Contains(personId)
-                                            select new PersonViewModel()
-                                            {
-                                                Id = p.Id,
-                                                PersonId = p.PersonId,
-                                                Name = p.Name,
-                                                Age = p.Age,
-                                                Sex = p.Sex,
-                                                Pulsations = p.Pulsations
-                                            }).ToList();
+                                            select new PersonViewModel(p)).ToList();
 
             return people;
         }
@@ -96,15 +82,7 @@ namespace Pulsaciones_dotnetV2.Controllers
             {
                 person = (from p in dbContext.People
                           where p.PersonId == personId
-                          select new PersonViewModel
-                          {
-                              Id = p.Id,
-                              PersonId = p.PersonId,
-                              Name = p.Name,
-                              Age = p.Age,
-                              Sex = p.Sex,
-                              Pulsations = p.Pulsations
-                          }).First();
+                          select new PersonViewModel(p)).First();
             }
             catch (Exception)
             {
@@ -134,6 +112,35 @@ namespace Pulsaciones_dotnetV2.Controllers
             {
                 serverResponse.Success = false;
                 serverResponse.Message = "Person don't delete.";
+            }
+
+            return serverResponse;
+        }
+
+        [HttpPut("[action]/{personId}")]
+        public ServerResponse Update(string personId, [FromBody] PersonInputModel model)
+        {
+            ServerResponse serverResponse = new ServerResponse();
+
+            try
+            {
+                Person person = (from p in dbContext.People
+                                 where p.PersonId == personId
+                                 select p).First();
+
+                person.Name = model.Name;
+                person.Age = model.Age;
+                person.Sex = model.Sex;
+
+                dbContext.People.Update(person);
+                dbContext.SaveChanges();
+                serverResponse.Success = true;
+                serverResponse.Message = "Person modified.";
+            }
+            catch (Exception)
+            {
+                serverResponse.Success = false;
+                serverResponse.Message = "Person don't modified.";
             }
 
             return serverResponse;
