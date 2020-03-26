@@ -31,4 +31,8 @@ export class PeopleComponent implements OnInit {
     this.router.navigateByUrl(`person/${person.personId}`);
   }
 
+  deletePerson(person: Person) {
+    this.people = this.people.filter(p => p.personId !== person.personId);
+    this.personService.delete(person.personId).subscribe();
+  }
 }
