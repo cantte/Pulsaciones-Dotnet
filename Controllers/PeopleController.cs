@@ -113,5 +113,30 @@ namespace Pulsaciones_dotnetV2.Controllers
 
             return person;
         }
+
+        [HttpDelete("[action]/{personId}")]
+        public ServerResponse Delete(string personId)
+        {
+            ServerResponse serverResponse = new ServerResponse();
+
+            try
+            {
+                Person person = (from p in dbContext.People
+                                where p.PersonId == personId
+                                select p).First();
+
+                dbContext.People.Remove(person);
+                dbContext.SaveChanges();
+                serverResponse.Success = true;
+                serverResponse.Message = "Person delete successfull.";
+            }
+            catch (Exception)
+            {
+                serverResponse.Success = false;
+                serverResponse.Message = "Person don't delete.";
+            }
+
+            return serverResponse;
+        }
     }
 }
