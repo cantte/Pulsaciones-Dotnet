@@ -16,7 +16,7 @@ namespace Pulsaciones_dotnetV2.Models
         {
             get
             {
-                return (Sex == "F") ? ((210 - Age) / 10) : ((220 - Age) / 10);
+                return (Sex == "F") ? ((210f - Age) / 10f) : ((220f - Age) / 10f);
             }
         }
     }
