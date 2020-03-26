@@ -44,6 +44,14 @@ export class PersonService {
       );
   }
 
+  delete(id: string): Observable<ServerResponse> {
+    return this.http.delete<ServerResponse>(this.baseUrl + `api/People/Delete/${id}`)
+      .pipe(
+        tap(_ => this.handleHttpError.log('Person delete')),
+        catchError(this.handleHttpError.handleError<ServerResponse>('deletePerson', null))
+      );
+  }
+
   getPerson(id: string): Observable<Person> {
     return this.http.get<Person>(this.baseUrl + `api/People/Person/${id}`)
       .pipe(
