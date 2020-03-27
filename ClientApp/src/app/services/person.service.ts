@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Person } from "../models/person";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { HandleHttpErrorService } from '../@base/handle-http-error.service';
@@ -27,7 +27,7 @@ export class PersonService {
   post(person: Person): Observable<ServerResponse> {
     return this.http.post<ServerResponse>(`${this.peopleUrl}/Insert`, person, httpOptions)
       .pipe(
-        tap(_ => this.handleHttpError.log('Datos guardados')),
+        tap(_ => this.handleHttpError.log('Data save.')),
         catchError(this.handleHttpError.handleError<ServerResponse>('savePerson', null))
       );
   }
@@ -35,7 +35,7 @@ export class PersonService {
   get(): Observable<Person[]> {
     return this.http.get<Person[]>(`${this.peopleUrl}/People`)
       .pipe(
-        tap(_ => this.handleHttpError.log('Datos recividos')),
+        tap(_ => this.handleHttpError.log('Data receive.')),
         catchError(this.handleHttpError.handleError<Person[]>('getPeople', []))
       );
   }
@@ -43,7 +43,7 @@ export class PersonService {
   update(person: Person): Observable<ServerResponse> {
     return this.http.post<ServerResponse>(`${this.peopleUrl}/Update/${person.personId}`, person, httpOptions)
       .pipe(
-        tap(_ => this.handleHttpError.log('Datos actualizados')),
+        tap(_ => this.handleHttpError.log('Data update.')),
         catchError(this.handleHttpError.handleError<ServerResponse>('updatePerson', null))
       );
   }
@@ -51,7 +51,7 @@ export class PersonService {
   delete(id: string): Observable<ServerResponse> {
     return this.http.delete<ServerResponse>(`${this.peopleUrl}/Delete/${id}`)
       .pipe(
-        tap(_ => this.handleHttpError.log('Person delete')),
+        tap(_ => this.handleHttpError.log('Data delete.')),
         catchError(this.handleHttpError.handleError<ServerResponse>('deletePerson', null))
       );
   }
@@ -59,7 +59,7 @@ export class PersonService {
   getPerson(id: string): Observable<Person> {
     return this.http.get<Person>(`${this.peopleUrl}/Person/${id}`)
       .pipe(
-        tap(_ => this.handleHttpError.log('Datos recividos')),
+        tap(_ => this.handleHttpError.log('Data receive.')),
         catchError(this.handleHttpError.handleError<Person>('searchPerson', null))
       );
   };
@@ -67,7 +67,7 @@ export class PersonService {
   searchPeople(term: string): Observable<Person[]> {
     return this.http.get<Person[]>(`${this.peopleUrl}/SearchPeople?personId=${term}`)
       .pipe(
-        tap(_ => this.handleHttpError.log('Datos recividos')),
+        tap(_ => this.handleHttpError.log('Data receive.')),
         catchError(this.handleHttpError.handleError<Person[]>('searchPeople', []))
       );
   }
