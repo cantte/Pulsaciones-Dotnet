@@ -11,6 +11,8 @@ using Pulsaciones_dotnetV2.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using System;
 
 namespace Pulsaciones_dotnetV2
 {
@@ -40,6 +42,29 @@ namespace Pulsaciones_dotnetV2
                 .AddIdentityServerJwt();
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddSwaggerGen(s =>
+            {
+                s.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "School API",
+                    Description = "School API - ASP.NET Core Web API",
+                    TermsOfService = new Uri("https://cla.dotnetfoundation.org/"),
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Carlos Andrés Pavajeau Max",
+                        Email = string.Empty,
+                        Url = new Uri("https://github.com/cantte/")
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "Dotnet foundation license",
+                        Url = new Uri("https://www.byasystems.co/license")
+                    }
+                });
+            });
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -70,7 +95,6 @@ namespace Pulsaciones_dotnetV2
             }
 
             app.UseRouting();
-
             app.UseAuthentication();
             app.UseIdentityServer();
             app.UseAuthorization();
@@ -80,6 +104,12 @@ namespace Pulsaciones_dotnetV2
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+            });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(s =>
+            {
+                s.SwaggerEndpoint("/swagger/v1/swagger.json", "My API version-1");
             });
 
             app.UseSpa(spa =>
