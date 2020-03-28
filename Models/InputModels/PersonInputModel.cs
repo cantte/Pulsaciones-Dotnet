@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Pulsaciones_dotnetV2.Models.InputModels
+﻿namespace Pulsaciones_dotnetV2.Models.InputModels
 {
     public class PersonInputModel
     {

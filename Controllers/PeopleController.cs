@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Pulsaciones_dotnetV2.Data;
 using Pulsaciones_dotnetV2.Models;
 using Pulsaciones_dotnetV2.Models.InputModels;
 using Pulsaciones_dotnetV2.Models.Response;
 using Pulsaciones_dotnetV2.Models.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Pulsaciones_dotnetV2.Controllers
 {
@@ -100,8 +99,8 @@ namespace Pulsaciones_dotnetV2.Controllers
             try
             {
                 Person person = (from p in dbContext.People
-                                where p.PersonId == personId
-                                select p).First();
+                                 where p.PersonId == personId
+                                 select p).First();
 
                 dbContext.People.Remove(person);
                 dbContext.SaveChanges();
