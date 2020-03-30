@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', redirectTo: '' },
   { path: 'register', component: PersonResgisterComponent },
+  { path: 'edit/:id', component: PersonResgisterComponent },
   { path: 'people', component: PeopleComponent },
   { path: 'person/:id', component: PersonDetailComponent }
 ];
