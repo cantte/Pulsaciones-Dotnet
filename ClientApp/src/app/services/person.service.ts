@@ -40,8 +40,8 @@ export class PersonService {
       );
   }
 
-  update(person: Person): Observable<ServerResponse> {
-    return this.http.post<ServerResponse>(`${this.peopleUrl}/Update/${person.personId}`, person, httpOptions)
+  put(person: Person): Observable<ServerResponse> {
+    return this.http.put<ServerResponse>(`${this.peopleUrl}/Update/${person.personId}`, person, httpOptions)
       .pipe(
         tap(_ => this.handleHttpError.log('Data update.')),
         catchError(this.handleHttpError.handleError<ServerResponse>('updatePerson', null))
@@ -71,4 +71,13 @@ export class PersonService {
         catchError(this.handleHttpError.handleError<Person[]>('searchPeople', []))
       );
   }
+
+  calculatePulsations(sex: string, age: number): Observable<number> {
+    return this.http.get<number>(`${this.peopleUrl}/CalculatePulsations?sex=${sex}&age=${age}`)
+      .pipe(
+        tap(_ => this.handleHttpError.log('Pulsations calculated')),
+        catchError(this.handleHttpError.handleError<number>('calculatePulsations', 0))
+      );
+  }
+
 }
