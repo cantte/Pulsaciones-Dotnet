@@ -34,6 +34,10 @@ export class PersonDetailComponent implements OnInit {
     this.personService.getPerson(id).subscribe(person => this.person = person);
   }
 
+  editPerson(person: Person) {
+    this.router.navigateByUrl(`edit/${person.personId}`);
+  }
+
   goBack(): void
   {
     this.location.back();
