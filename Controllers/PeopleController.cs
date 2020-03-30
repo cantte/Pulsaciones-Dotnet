@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Pulsaciones_dotnetV2.Data;
 using Pulsaciones_dotnetV2.Models;
+using Pulsaciones_dotnetV2.Models.EditModels;
 using Pulsaciones_dotnetV2.Models.InputModels;
 using Pulsaciones_dotnetV2.Models.Response;
 using Pulsaciones_dotnetV2.Models.ViewModels;
@@ -117,7 +118,7 @@ namespace Pulsaciones_dotnetV2.Controllers
         }
 
         [HttpPut("[action]/{personId}")]
-        public ServerResponse Update(string personId, [FromBody] PersonInputModel model)
+        public ServerResponse Update(string personId, [FromBody] PersonEditModel model)
         {
             ServerResponse serverResponse = new ServerResponse();
 
@@ -143,6 +144,13 @@ namespace Pulsaciones_dotnetV2.Controllers
             }
 
             return serverResponse;
+        }
+
+        [HttpGet("[action]")]
+        public float CalculatePulsations([FromQuery] string sex, [FromQuery] int age)
+        {
+            Person p = new Person() { Sex = sex, Age = age };
+            return p.Pulsations;
         }
     }
 }
