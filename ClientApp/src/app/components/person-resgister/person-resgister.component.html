@@ -1,9 +1,9 @@
-<h1>Form of register person</h1>
+<h1>{{title}}</h1>
 <div class="center-content">
     <form [formGroup]="personForm" (ngSubmit)="onSubmit()" style="width: 70%;"> 
         <div class="form-element">
             <label for="id">Id</label>
-            <input type="text" name="id" id="id" class="form-input" formControlName="personId">
+            <input type="text" name="id" id="id" class="form-input" formControlName="personId" [disabled]="updateForm == true" [readOnly]="updateForm == true">
             <small class="form-help">Please enter your id.</small>
         </div>
         <div class="form-element">
@@ -18,9 +18,9 @@
         </div>
         <div class="form-element form-check">
             <label><span style="margin-right: 10px;">Sex:</span>
-                <input type="radio" name="sex" id="female" value="F" class="form-check" formControlName="personSex">
+                <input type="radio"  formControlName="personSex" name="personSex" id="female" value="F" class="form-check">
                 <label for="female">Female</label>
-                <input type="radio" name="sex" id="male" value="M" class="form-check" formControlName="personSex">
+                <input type="radio"  formControlName="personSex" name="personSex" id="male" value="M" class="form-check">
                 <label for="male">Male</label>
             </label>
         </div>
@@ -29,7 +29,8 @@
         </div>
         <div class="center-content">
             <button type="button" class="dodger_blue" (click)="calculatePulsations()">Calculate pulsation</button>
-            <button type="submit" class="dodger_blue">Register person</button>
+            <button type="submit" class="dodger_blue" [textContent]="(updateForm == true) ? 'Update person' : 'Save person'">
+            </button>
         </div>
         <div class="center-content">
             <div class="information-block error-block" *ngIf="invalidForm">
