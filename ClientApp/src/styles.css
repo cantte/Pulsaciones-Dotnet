@@ -72,6 +72,11 @@ a {
     display: flex;
     justify-content: center;
 }
+
+.center-block-content {
+    display: block; 
+    margin: 0 auto;
+}
   
 .center-element {
     position: absolute;
@@ -743,6 +748,7 @@ input[type="password"].form-input {
 
 .accordion-block {
     display: block;
+    margin: 5px;
 }
 
 .accordion-btn {
@@ -756,7 +762,7 @@ input[type="password"].form-input {
 }
 
 .accordion-panel {
-    padding: 0 18px;
+    padding: 3px 18px;
     background-color: white;
     display: none;
     overflow: hidden;
@@ -768,8 +774,14 @@ input[type="password"].form-input {
 }
 
 .accordion-block p {
-    margin-top: 7px;
-    margin-bottom: 7px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.accordion-block a {
+    display: inline-block !important;
+    text-decoration: none;
+    color: var(--dodger_blue);
 }
 
 .accordion-block.active > .accordion-btn {
