@@ -9,6 +9,7 @@ import { PersonService } from 'src/app/services/person.service';
 })
 export class PeopleHistoryComponent implements OnInit {
 
+  readonly MAX_PEOPLE_NUMBER = 5;
   people: Person[] = [];
 
   constructor(
@@ -19,11 +20,13 @@ export class PeopleHistoryComponent implements OnInit {
     this.loadHistory();
   }
 
-  loadHistory(): void
-  {
+  loadHistory(): void {
     this.personService.get().subscribe(people => {
-      this.people = people.slice(-5).reverse();
+      this.people = people.slice(-this.MAX_PEOPLE_NUMBER).reverse();
     });
   }
 
+  accordionClick(element: HTMLElement) {
+    element.classList.toggle('active');
+  }
 }
