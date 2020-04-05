@@ -1,18 +1,23 @@
 <h3>Last {{ MAX_PEOPLE_NUMBER }} registered people</h3>
 <div class="center-block-content" style="width: 75%;">
-    <div>
-        <div class="accordion-block" #accordion_block *ngFor="let person of people" (click)="accordionClick(accordion_block)">
-            <button class="accordion-btn">{{person.personId}} - {{person.name}}</button>
-            <div class="accordion-panel">
+        <mat-accordion *ngFor="let person of people" class="headers-aling">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        {{person.personId}} - {{person.name}}
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        More info
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
                 <p>
                     {{person.name}} identified with ID {{person.personId}} of sex {{person.sex}} with {{person.age}} years, 
                     has {{person.pulsations}} beats per second.
                     <br>
                     If you want to modify this data <a routerLink="edit/{{person.personId}}">Click here</a>.
                 </p>
-            </div>
-        </div>
+            </mat-expansion-panel>
+        </mat-accordion>
     </div>
-</div>
 <br>
 <br>
