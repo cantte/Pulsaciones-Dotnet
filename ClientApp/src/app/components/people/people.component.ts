@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class PeopleComponent implements OnInit {
 
   people: Person[];
-
+  displayedColumns: string[] = ['id', 'name', 'age', 'sex', 'pulsations', 'edit', 'delete'];
   constructor(
     private personService: PersonService,
     private router: Router
@@ -34,5 +34,9 @@ export class PeopleComponent implements OnInit {
   deletePerson(person: Person) {
     this.people = this.people.filter(p => p.personId !== person.personId);
     this.personService.delete(person.personId).subscribe();
+  }
+
+  editPerson(person: Person) {
+    this.router.navigateByUrl(`edit/${person.personId}`);
   }
 }

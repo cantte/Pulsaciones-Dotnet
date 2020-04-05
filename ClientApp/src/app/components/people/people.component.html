@@ -1,26 +1,42 @@
 <h1>List of People</h1>
-<div class="center-content">
-    <table>
-        <thead>
-            <tr class="table-header">
-                <th>Id</th>
-                <th>Name</th>
-                <th>Age</th>
-                <th>Sex</th>
-                <th>Pulsations</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody *ngFor="let person of people">
-            <tr class="person-cell" (click)="goTo(person)">
-                <td>{{person.personId}}</td>
-                <td>{{person.name}}</td>
-                <td>{{person.age}}</td>
-                <td>{{person.sex}}</td>
-                <td>{{person.pulsations}}</td>
-                <td><button class="light-button vivid_red" (click)="deletePerson(person)">Delete</button></td>
-            </tr>
-        </tbody>
-    </table>
+<div class="center-block-content">
+    <div style="padding: 10px;">
+        <table mat-table [dataSource]="people" class="mat-elevation-z8">
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef>Id</th>
+                <td mat-cell *matCellDef="let person">{{person.personId}}</td>
+            </ng-container>
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef>Name</th>
+                <td mat-cell *matCellDef="let person">{{person.name}}</td>
+            </ng-container>
+            <ng-container matColumnDef="age">
+                <th mat-header-cell *matHeaderCellDef>Age</th>
+                <td mat-cell *matCellDef="let person">{{person.age}}</td>
+            </ng-container>
+            <ng-container matColumnDef="sex">
+                <th mat-header-cell *matHeaderCellDef>Sex</th>
+                <td mat-cell *matCellDef="let person">{{person.sex}}</td>
+            </ng-container>
+            <ng-container matColumnDef="pulsations">
+                <th mat-header-cell *matHeaderCellDef>Pulsations</th>
+                <td mat-cell *matCellDef="let person">{{person.pulsations}}</td>
+            </ng-container>
+            <ng-container matColumnDef="edit">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let person">
+                    <button mat-stroked-button class="light-button royal_azure" (click)="editPerson(person)">Edit</button>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="delete">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let person">
+                    <button mat-stroked-button class="light-button vivid_red" (click)="deletePerson(person)">Delete</button>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
 </div>
-<button class="red-button">Delete all</button>
+<button mat-raised-button class="vivid_red" style="margin-left: 10px;">Delete all</button>
