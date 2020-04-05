@@ -17,6 +17,8 @@ import { PersonSearchComponent } from './components/person-search/person-search.
 import { PersonResgisterComponent } from './components/person-resgister/person-resgister.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PersonService } from './services/person.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { PersonService } from './services/person.service';
     FormsModule,
     ReactiveFormsModule,
     ApiAuthorizationModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
