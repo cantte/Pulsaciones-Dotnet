@@ -2,3 +2,14 @@ h1 {
     font-family: 'Fira Sans';
     margin-bottom: 20px;
 }
+
+img {
+    min-width: 300px;
+}
+
+@media screen and (max-width: 600px) {
+    img {
+        width: 250px;
+        max-width: 300px;
+    }
+}
