@@ -1,38 +1,59 @@
 <h1>{{title}}</h1>
 <div class="center-content">
-    <form [formGroup]="personForm" (ngSubmit)="onSubmit()" style="width: 70%;"> 
-        <div class="form-element">
-            <label for="id">Id</label>
-            <input type="text" name="id" id="id" class="form-input" formControlName="personId" [disabled]="updateForm == true" [readOnly]="updateForm == true">
-            <small class="form-help">Please enter your id.</small>
-        </div>
-        <div class="form-element">
-            <label for="name">Name</label>
-            <input type="text" name="name" id="name" class="form-input" formControlName="personName">
-            <small class="form-help">Please enter your complete name.</small>
-        </div>
-        <div class="form-element">
-            <label for="age">Age</label>
-            <input type="number" name="age" id="age" class="form-input" formControlName="personAge">
-            <small class="form-help">Please enter your age. Values between 1 and 100.</small>
-        </div>
-        <div class="form-element form-check">
-            <label><span style="margin-right: 10px;">Sex:</span>
-                <input type="radio"  formControlName="personSex" name="personSex" id="female" value="F" class="form-check">
-                <label for="female">Female</label>
-                <input type="radio"  formControlName="personSex" name="personSex" id="male" value="M" class="form-check">
-                <label for="male">Male</label>
-            </label>
-        </div>
-        <div class="form-element">
-            <span>Pulsations: {{ pulsations }}</span> 
-        </div>
-        <div class="center-content">
-            <button type="button" class="dodger_blue" (click)="calculatePulsations()">Calculate pulsation</button>
-            <button type="submit" class="dodger_blue" [textContent]="(updateForm == true) ? 'Update person' : 'Save person'">
-            </button>
-        </div>
-        <div class="center-content">
+    <mat-card style="width: 80%;">
+        <form [formGroup]="personForm" (ngSubmit)="onSubmit()" style="width: 100%"> 
+            <div class="center-block-content" style="width: 100%;">
+                <div class="form-element">
+                    <mat-form-field style="height: 35px;">
+                        <mat-label>Id</mat-label>
+                        <input type="text" matInput  [disabled]="(updateForm == true) ? true : false" [readOnly]="updateForm == true" placeholder="Your id" formControlName="personId">
+                        <mat-hint>Please enter your id</mat-hint>
+                        <mat-error *ngIf="personForm.controls['personId'].hasError('required')">Your id is required.</mat-error>
+                        <mat-error *ngIf="!personForm.controls['personId'].hasError('required') && 
+                            personForm.controls['personId'].hasError('pattern')">
+                            Your id must be numeric.
+                        </mat-error>
+                        <mat-error *ngIf="!personForm.controls['personId'].hasError('required') && 
+                            personForm.controls['personId'].hasError('minLength')">
+                            Your id must have at least 5 numeric characters.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-element">
+                    <mat-form-field style="height: 35px;">
+                        <mat-label>Name</mat-label>
+                        <input type="text" matInput placeholder="Your name" formControlName="personName">
+                        <mat-hint>Please enter your complete name</mat-hint>
+                    </mat-form-field>
+                </div>
+                <div class="form-element">
+                    <mat-form-field style="height: 35px;">
+                        <mat-label>Age</mat-label>
+                        <input type="number" matInput name="age" id="age" placeholder="Your age" formControlName="personAge">
+                        <mat-hint>Please enter your age. Values between 1-100</mat-hint>
+                    </mat-form-field>
+                </div>
+                <div class="form-element">
+                    <label>Select a sex</label>
+                    <mat-radio-group aria-label="Select a sex" formControlName="personSex">
+                        <mat-radio-button value="F">
+                            Female
+                        </mat-radio-button>
+                        <mat-radio-button value="M">
+                            Male
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div *ngIf="pulsations">
+                    <span>Pulsations: {{ pulsations }}</span>
+                </div>
+            </div>
+            <div class="center-content">
+                <button type="submit" mat-flat-button class="royal_azure" style="margin-right: 5px;" [textContent]="(updateForm == true) ? 'Update person' : 'Save person'"></button>
+                <button type="button" mat-flat-button class="royal_azure" (click)="calculatePulsations()">Calculate Pulsations</button>
+            </div>
+        </form>
+        <div class="center-content" style="margin-top: 10px;">
             <div class="information-block error-block" *ngIf="invalidForm">
                 <span class="message">
                     Please fill required fields.
@@ -42,5 +63,5 @@
                 <span class="message">{{ serverResponse.message }}</span>
             </div>
         </div>
-    </form>
+    </mat-card>
 </div>

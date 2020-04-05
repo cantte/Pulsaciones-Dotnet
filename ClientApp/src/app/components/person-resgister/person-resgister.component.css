@@ -5,3 +5,12 @@ h1 {
 label, span, h1, .form-input, .form-check, .form-help {
     font-family: 'Varela Round', sans-serif;
 }
+
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+}
+
+mat-form-field, input {
+    width: 100%;
+    height: 30px;
+}

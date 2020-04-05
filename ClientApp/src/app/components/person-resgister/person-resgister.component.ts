@@ -16,7 +16,7 @@ export class PersonResgisterComponent implements OnInit {
   invalidForm: boolean;
   updateForm: boolean = false;
   serverResponse: ServerResponse = null;
-  pulsations: number = 0;
+  pulsations: number = null;
   title: string;
 
   constructor(
@@ -44,13 +44,14 @@ export class PersonResgisterComponent implements OnInit {
         this.personForm.controls.personName.setValue(p.name);
         this.personForm.controls.personAge.setValue(p.age);
         this.personForm.controls.personSex.setValue(p.sex);
+        this.pulsations = p.pulsations;
       }
     });
   }
 
   createFormGroup() {
     return new FormGroup({
-      personId: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      personId: new FormControl('', [Validators.required, Validators.minLength(5), Validators.pattern('[0-9]+')]),
       personName: new FormControl('', [Validators.required, Validators.minLength(3)]),
       personAge: new FormControl('', [Validators.required, Validators.max(100), Validators.min(1)]),
       personSex: new FormControl('', [Validators.required])
