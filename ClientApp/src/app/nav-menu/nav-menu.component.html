@@ -1,15 +1,16 @@
-<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-<div class="nav-menu dodger_blue">
-  <nav class="menu">
-    <div>
-      <ul class="menu-options">
-        <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"><a routerLink="/">Home</a></li>
-        <li [routerLinkActive]="['active']"><a routerLink="register">Register person</a></li>
-        <li [routerLinkActive]="['active']"><a routerLink="people">People</a></li>
-      </ul>
-    </div>
-  </nav>
-  <div class="right_content">
-    <app-person-search></app-person-search>
+<mat-toolbar class="royal_azure">
+  <div class="mat-option">
+    <a mat-button routerLink="/" class="royal_azure" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+    <a mat-button routerLink="register" class="royal_azure" routerLinkActive="active">Register person</a>
+    <a mat-button routerLink="people" class="royal_azure" routerLinkActive="active">People</a>
   </div>
-</div>
+  <button mat-icon-button [matMenuTriggerFor]="menu" class="mobile-menu royal_azure">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu" class="royal_azure" style="min-width: 250px;">
+    <a mat-button routerLink="/" class="royal_azure" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+    <a mat-button routerLink="register" class="royal_azure" routerLinkActive="active">Register person</a>
+    <a mat-button routerLink="people" class="royal_azure" routerLinkActive="active">People</a>
+  </mat-menu>
+</mat-toolbar>
+

@@ -1,0 +1,30 @@
+a {
+    color: white;
+}
+
+a.royal_azure.active {
+    background-color: var(--blue_ryb);;
+}
+
+.mobile-menu {
+    display: none;
+}
+
+mat-toolbar {
+    margin-bottom: 10px;
+}
+
+@media screen and (max-width: 600px) {
+    a {
+        display: block;
+        width: 100%;
+    }
+
+    .mobile-menu {
+        display: block;
+    }
+
+    .mat-option {
+        display: none;
+    }
+}
