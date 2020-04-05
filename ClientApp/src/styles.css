@@ -114,13 +114,14 @@ h6 {
     font-size: 20px;
 }
   
-button {
+.btn {
     position: relative;
-    font-size: 18px;
+    font-size: 14px;
     font-family: 'Varela Round', sans-serif;
     text-align: center;
     text-decoration: none;
-    padding: 10px;
+    padding: 0 16px;
+    line-height: 36px;
     margin: 4px;
     border-radius: .3rem;
     border: none;
@@ -131,7 +132,7 @@ button {
     overflow: hidden;
 }
 
-button:hover {
+.btn:hover {
     background-color: #DDD;
     box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.5);
 }
@@ -277,7 +278,7 @@ button.lime_green:hover {
     background-color: var(--lime_green) !important;
 }
 
-form {
+.form {
     display: block;
     padding: 7px;
     margin: 5px;
@@ -542,7 +543,7 @@ input:focus + .search-results, .search-box .search-results:hover {
 
 .form-element {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 40px;
     margin-left: 7px;
 }
 
@@ -1258,3 +1259,5 @@ input[type="password"].form-input {
 .text_rich_black_fogra29 {
     color: var(--rich_black_fogra29);
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
