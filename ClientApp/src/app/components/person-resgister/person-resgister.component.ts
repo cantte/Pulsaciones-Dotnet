@@ -31,6 +31,7 @@ export class PersonResgisterComponent implements OnInit {
     this.title = `Form of ${urlPath} person`;
     if (urlPath == 'edit') {
       this.updateForm = true;
+      this.personForm.controls['personId'].disable();
       this.loadPerson();
     }
       
@@ -40,10 +41,10 @@ export class PersonResgisterComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.personService.getPerson(id).subscribe(p => {
       if (p != null) {
-        this.personForm.controls.personId.setValue(p.personId);
-        this.personForm.controls.personName.setValue(p.name);
-        this.personForm.controls.personAge.setValue(p.age);
-        this.personForm.controls.personSex.setValue(p.sex);
+        this.personForm.controls['personId'].setValue(p.personId);
+        this.personForm.controls['personName'].setValue(p.name);
+        this.personForm.controls['personAge'].setValue(p.age);
+        this.personForm.controls['personSex'].setValue(p.sex);
         this.pulsations = p.pulsations;
       }
     });
@@ -52,7 +53,7 @@ export class PersonResgisterComponent implements OnInit {
   createFormGroup() {
     return new FormGroup({
       personId: new FormControl('', [Validators.required, Validators.minLength(5), Validators.pattern('[0-9]+')]),
-      personName: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      personName: new FormControl('', [Validators.required, Validators.minLength(5)]),
       personAge: new FormControl('', [Validators.required, Validators.max(100), Validators.min(1)]),
       personSex: new FormControl('', [Validators.required])
     })
@@ -61,10 +62,10 @@ export class PersonResgisterComponent implements OnInit {
   onSubmit() {
     if (this.personForm.valid) {
       let person: Person = new Person();
-      person.personId = this.personForm.value.personId;
-      person.name = this.personForm.value.personName;
-      person.age = +this.personForm.value.personAge;
-      person.sex = this.personForm.value.personSex;
+      person.personId = this.personForm.controls['personId'].value;
+      person.name = this.personForm.controls['personName'].value;
+      person.age = +this.personForm.controls['personAge'].value;
+      person.sex = this.personForm.controls['personSex'].value;
 
       if (this.updateForm) {
         this.personService.put(person).subscribe(serverResponse => {
@@ -86,7 +87,7 @@ export class PersonResgisterComponent implements OnInit {
       this.serverResponse = null;
       if (this.updateForm) {
         if (serverResponse.success)
-          this.router.navigateByUrl(`person/${this.personForm.value.personId}`);
+          this.router.navigateByUrl(`person/${this.personForm.controls['personId'].value}`);
       }
       else {
         if (serverResponse.success)

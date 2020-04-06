@@ -6,7 +6,7 @@
                 <div class="form-element">
                     <mat-form-field style="height: 35px;">
                         <mat-label>Id</mat-label>
-                        <input type="text" matInput  [disabled]="(updateForm == true) ? true : false" [readOnly]="updateForm == true" placeholder="Your id" formControlName="personId">
+                        <input type="text" matInput placeholder="Your id" formControlName="personId">
                         <mat-hint>Please enter your id</mat-hint>
                         <mat-error *ngIf="personForm.controls['personId'].hasError('required')">Your id is required.</mat-error>
                         <mat-error *ngIf="!personForm.controls['personId'].hasError('required') && 
@@ -14,7 +14,7 @@
                             Your id must be numeric.
                         </mat-error>
                         <mat-error *ngIf="!personForm.controls['personId'].hasError('required') && 
-                            personForm.controls['personId'].hasError('minLength')">
+                            personForm.controls['personId'].hasError('minlength')">
                             Your id must have at least 5 numeric characters.
                         </mat-error>
                     </mat-form-field>
@@ -24,6 +24,12 @@
                         <mat-label>Name</mat-label>
                         <input type="text" matInput placeholder="Your name" formControlName="personName">
                         <mat-hint>Please enter your complete name</mat-hint>
+                        <mat-error *ngIf="personForm.controls['personName'].hasError('required')">
+                          Your name is required.
+                        </mat-error>
+                        <mat-error *ngIf="personForm.controls['personName'].hasError('minlength')">
+                            Your name must have at least 5 characters.
+                        </mat-error>
                     </mat-form-field>
                 </div>
                 <div class="form-element">
@@ -31,6 +37,15 @@
                         <mat-label>Age</mat-label>
                         <input type="number" matInput name="age" id="age" placeholder="Your age" formControlName="personAge">
                         <mat-hint>Please enter your age. Values between 1-100</mat-hint>
+                        <mat-error *ngIf="personForm.controls['personAge'].hasError('required')">
+                            Your age is required
+                        </mat-error>
+                        <mat-error *ngIf="personForm.controls['personAge'].hasError('min')">
+                            Age must be greater than or equal to 1
+                        </mat-error>
+                        <mat-error *ngIf="personForm.controls['personAge'].hasError('max')">
+                            Age must be less than 100
+                        </mat-error>
                     </mat-form-field>
                 </div>
                 <div class="form-element">
