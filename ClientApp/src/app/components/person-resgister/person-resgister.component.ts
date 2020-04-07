@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from "@angular/forms";
 import { Person } from 'src/app/models/person';
 import { PersonService } from 'src/app/services/person.service';
 import { ServerResponse } from 'src/app/@base/server-response';
@@ -13,67 +13,86 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class PersonResgisterComponent implements OnInit {
 
   personForm: FormGroup;
+  person: Person = new Person();
   invalidForm: boolean;
   updateForm: boolean = false;
   serverResponse: ServerResponse = null;
   pulsations: number = null;
   title: string;
 
+  
+  public get controls() {
+    return this.personForm.controls;
+  }
+  
+
   constructor(
     private personService: PersonService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
-    this.personForm = this.createFormGroup();
+    this.initForm();
+    this.setFormType();
+    
+    if (this.updateForm) {
+      this.controls['personId'].disable();
+      this.loadPerson();
+    } else {
+      const id = this.route.snapshot.paramMap.get('id');
+      if (id) {
+        this.controls['personId'].disable();
+        this.controls['personId'].setValue(id);
+      }
+    }
+  }
+
+  initForm() {
+    this.personForm = this.formBuilder.group({
+      personId: ['', [Validators.required, Validators.minLength(5), Validators.pattern('[0-9]+')]],
+      personName: ['', [Validators.required, Validators.minLength(5)]],
+      personAge: ['', [Validators.required, Validators.max(100), Validators.min(1)]],
+      personSex: ['', [Validators.required]]
+    });
+  }
+
+  setFormType() {
     const urlPath = this.route.snapshot.url[0].path;
     this.title = `Form of ${urlPath} person`;
     if (urlPath == 'edit') {
       this.updateForm = true;
-      this.personForm.controls['personId'].disable();
-      this.loadPerson();
     }
-      
   }
 
   loadPerson() {
     const id = this.route.snapshot.paramMap.get('id');
     this.personService.getPerson(id).subscribe(p => {
       if (p != null) {
-        this.personForm.controls['personId'].setValue(p.personId);
-        this.personForm.controls['personName'].setValue(p.name);
-        this.personForm.controls['personAge'].setValue(p.age);
-        this.personForm.controls['personSex'].setValue(p.sex);
         this.pulsations = p.pulsations;
+        this.controls['personId'].setValue(p.personId);
+        this.controls['personName'].setValue(p.name);
+        this.controls['personAge'].setValue(p.age);
+        this.controls['personSex'].setValue(p.sex);
       }
     });
   }
 
-  createFormGroup() {
-    return new FormGroup({
-      personId: new FormControl('', [Validators.required, Validators.minLength(5), Validators.pattern('[0-9]+')]),
-      personName: new FormControl('', [Validators.required, Validators.minLength(5)]),
-      personAge: new FormControl('', [Validators.required, Validators.max(100), Validators.min(1)]),
-      personSex: new FormControl('', [Validators.required])
-    })
-  }
-
   onSubmit() {
     if (this.personForm.valid) {
-      let person: Person = new Person();
-      person.personId = this.personForm.controls['personId'].value;
-      person.name = this.personForm.controls['personName'].value;
-      person.age = +this.personForm.controls['personAge'].value;
-      person.sex = this.personForm.controls['personSex'].value;
+      this.person.personId = this.controls['personId'].value;
+      this.person.name = this.controls['personName'].value;
+      this.person.age = +this.controls['personAge'].value;
+      this.person.sex = this.controls['personSex'].value;
 
       if (this.updateForm) {
-        this.personService.put(person).subscribe(serverResponse => {
+        this.personService.put(this.person).subscribe(serverResponse => {
           this.handleServerResponse(serverResponse);
         });
       }
       else {
-        this.personService.post(person).subscribe(serverResponse => {
+        this.personService.post(this.person).subscribe(serverResponse => {
           this.handleServerResponse(serverResponse);
         });
       }
@@ -85,13 +104,15 @@ export class PersonResgisterComponent implements OnInit {
     this.serverResponse = serverResponse;
     setTimeout(() => {
       this.serverResponse = null;
+      this.person = new Person();
       if (this.updateForm) {
         if (serverResponse.success)
-          this.router.navigateByUrl(`person/${this.personForm.controls['personId'].value}`);
+          this.router.navigateByUrl(`person/${this.controls['personId'].value}`);
       }
       else {
         if (serverResponse.success)
           this.onResetForm();
+          this.router.navigateByUrl('people');
       }
     }, 3000);
   }
@@ -102,9 +123,9 @@ export class PersonResgisterComponent implements OnInit {
   }
 
   calculatePulsations() {
-    if (this.personForm.controls['personAge'].valid && this.personForm.controls['personSex'].valid) {
-      let sex = this.personForm.controls['personSex'].value;
-      let age = +this.personForm.controls['personAge'].value;
+    if (this.controls['personAge'].valid && this.controls['personSex'].valid) {
+      const sex = this.controls['personSex'].value;
+      const age = +this.controls['personAge'].value;
       this.personService.calculatePulsations(sex, age).subscribe(pul => this.pulsations = pul);
       this.invalidForm = false;
     }

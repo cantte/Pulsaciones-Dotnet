@@ -1,6 +1,6 @@
 <h1>{{title}}</h1>
 <div class="center-content">
-    <mat-card style="width: 80%;">
+    <mat-card style="width: 85%;">
         <form [formGroup]="personForm" (ngSubmit)="onSubmit()" style="width: 100%"> 
             <div class="center-block-content" style="width: 100%;">
                 <div class="form-element">
@@ -8,13 +8,13 @@
                         <mat-label>Id</mat-label>
                         <input type="text" matInput placeholder="Your id" formControlName="personId">
                         <mat-hint>Please enter your id</mat-hint>
-                        <mat-error *ngIf="personForm.controls['personId'].hasError('required')">Your id is required.</mat-error>
-                        <mat-error *ngIf="!personForm.controls['personId'].hasError('required') && 
-                            personForm.controls['personId'].hasError('pattern')">
+                        <mat-error *ngIf="controls['personId'].hasError('required')">Your id is required.</mat-error>
+                        <mat-error *ngIf="!controls['personId'].hasError('required') && 
+                            controls['personId'].hasError('pattern')">
                             Your id must be numeric.
                         </mat-error>
-                        <mat-error *ngIf="!personForm.controls['personId'].hasError('required') && 
-                            personForm.controls['personId'].hasError('minlength')">
+                        <mat-error *ngIf="!controls['personId'].hasError('required') && 
+                            controls['personId'].hasError('minlength')">
                             Your id must have at least 5 numeric characters.
                         </mat-error>
                     </mat-form-field>
@@ -24,10 +24,10 @@
                         <mat-label>Name</mat-label>
                         <input type="text" matInput placeholder="Your name" formControlName="personName">
                         <mat-hint>Please enter your complete name</mat-hint>
-                        <mat-error *ngIf="personForm.controls['personName'].hasError('required')">
+                        <mat-error *ngIf="controls['personName'].hasError('required')">
                           Your name is required.
                         </mat-error>
-                        <mat-error *ngIf="personForm.controls['personName'].hasError('minlength')">
+                        <mat-error *ngIf="controls['personName'].hasError('minlength')">
                             Your name must have at least 5 characters.
                         </mat-error>
                     </mat-form-field>
@@ -37,13 +37,13 @@
                         <mat-label>Age</mat-label>
                         <input type="number" matInput name="age" id="age" placeholder="Your age" formControlName="personAge">
                         <mat-hint>Please enter your age. Values between 1-100</mat-hint>
-                        <mat-error *ngIf="personForm.controls['personAge'].hasError('required')">
+                        <mat-error *ngIf="controls['personAge'].hasError('required')">
                             Your age is required
                         </mat-error>
-                        <mat-error *ngIf="personForm.controls['personAge'].hasError('min')">
+                        <mat-error *ngIf="controls['personAge'].hasError('min')">
                             Age must be greater than or equal to 1
                         </mat-error>
-                        <mat-error *ngIf="personForm.controls['personAge'].hasError('max')">
+                        <mat-error *ngIf="controls['personAge'].hasError('max')">
                             Age must be less than 100
                         </mat-error>
                     </mat-form-field>

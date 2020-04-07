@@ -1,9 +1,7 @@
 h1 {
     margin-bottom: 20px;
-}
-
-label, span, h1, .form-input, .form-check, .form-help {
-    font-family: 'Varela Round', sans-serif;
+    margin-top: 20px;
+    font-size: 27px;
 }
 
 .mat-radio-button ~ .mat-radio-button {
