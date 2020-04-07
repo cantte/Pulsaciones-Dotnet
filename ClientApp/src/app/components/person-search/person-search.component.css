@@ -2,3 +2,7 @@
     line-height: normal;
     padding: 5px;
 }
+
+.search-box > * {
+    font-size: 12px !important;
+}
