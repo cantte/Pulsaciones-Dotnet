@@ -392,10 +392,8 @@ span {
 }
 
 .search-box {
-    padding-top: 10px;
     display: inline-block;
     position: relative;
-    margin: 0 auto;
     width: 300px;
 }
 
@@ -403,12 +401,11 @@ span {
     cursor: text;
     height: 25px;
     width: 200px;
-    font-size: 15px;
     font-family: 'Nunito';
-    padding-left: 25px;
+    padding-left: 30px;
     background: white url("http://cssdeck.com/uploads/media/items/5/5JuDgOa.png") 10px 7px no-repeat;
     border: none;
-    border-radius: 15px;
+    border-radius: 7px;
     margin-right: 2px;
     box-shadow: inset 0 1px #E5E7ED, 0 1px 0 #FCFCFC;
 }
@@ -416,16 +413,16 @@ span {
 .search-box .search-results {
     display: none;
     position: absolute;
-    top: 45px;
-    left: 0;
+    top: 40px;
+    left: -30px;
     right: 0;
-    z-index: 999;
+    z-index: 5;
     padding: 0;
     margin: 0;
     border: none;
     border-radius: 3px;
     background-color: #FDFDFD;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
 }
 
 .search-box .search-results li {
@@ -486,10 +483,9 @@ span {
     display: block;
     position: relative;
     margin: 0 -1px;
-    padding: 6px 40px 6px 10px;
+    padding: 0px 15px;
     color: #808394;
     font-weight: 300;
-    font-family: 'Nunito';
     text-shadow: 0 1px #FFF;
     border: 1px solid transparent;
     border-radius: 3px;
@@ -501,8 +497,8 @@ span {
 
 .search-box .search-results a::before {
     content: '';
-    width: 18px;
-    height: 18px;
+    width: 10px;
+    height: 10px;
     position: absolute;
     top: 50%;
     right: 10px;
