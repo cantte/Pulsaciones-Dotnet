@@ -42,3 +42,12 @@ button {
     width: 50%;
     text-align: right;
 }
+
+.not-found-msg h1{
+    font-size: 40px !important;
+}
+
+.not-found-msg button {
+    color: white;
+    margin: 0px;
+}

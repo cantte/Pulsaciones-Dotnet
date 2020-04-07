@@ -34,7 +34,10 @@
             </div>
         </div>
     </div>
-    <ng-template #notFound>
-        <h1 style="margin-top: 15%;">Not found person. Try register.</h1>
-    </ng-template>
 </div>
+<ng-template #notFound>
+    <div class="center-element not-found-msg">
+        <h1>Not found person.</h1>
+        <button mat-button class="blue_ryb" (click)="registerPerson()">Do you want register it?</button>
+    </div>
+</ng-template>

@@ -12,6 +12,7 @@ import { Location } from "@angular/common";
 export class PersonDetailComponent implements OnInit {
 
   person: Person;
+  personId: string;
 
   constructor(
     private personService: PersonService,
@@ -31,11 +32,21 @@ export class PersonDetailComponent implements OnInit {
   getPerson(): void
   {
     const id = this.route.snapshot.paramMap.get('id');
-    this.personService.getPerson(id).subscribe(person => this.person = person);
+    this.personService.getPerson(id).subscribe(person => {
+      this.person = person;
+
+      if (!this.person) {
+        this.personId = id;
+      }
+    });
   }
 
   editPerson(person: Person) {
     this.router.navigateByUrl(`edit/${person.personId}`);
+  }
+
+  registerPerson() {
+    this.router.navigateByUrl(`register/${this.personId}`);
   }
 
   goBack(): void
