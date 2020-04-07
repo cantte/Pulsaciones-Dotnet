@@ -28,3 +28,12 @@ mat-toolbar {
         display: none;
     }
 }
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+app-person-search {
+    margin-right: 7px;
+    vertical-align: top;
+}
