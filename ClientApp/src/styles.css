@@ -5,7 +5,6 @@
 * {
     margin: 0%;
     padding: 0%;
-    font-family: Arial, Helvetica, sans-serif;
     box-sizing: border-box;
 
     --yellow_sunshine: #FFFB16;
@@ -40,13 +39,13 @@
     --rich_black: #07393D;
     --licorice: #141115;
     --arsenic: #3F4042;
-    --rich_black_fogra29: #00091D; 
+    --rich_black_fogra29: #00091D;
 }
 
 html {
     box-sizing: border-box;
 }
-  
+
 * {
     box-sizing: inherit;
 }
@@ -55,11 +54,11 @@ html {
     box-sizing: inherit;
 }
 
-:focus { 
-    outline-color: transparent; 
+:focus {
+    outline-color: transparent;
     outline-style: none;
 }
-  
+
 body::-webkit-scrollbar {
     width: 0%;
 }
@@ -67,17 +66,17 @@ body::-webkit-scrollbar {
 a {
     text-decoration: none;
 }
-  
+
 .center-content {
     display: flex;
     justify-content: center;
 }
 
 .center-block-content {
-    display: block; 
+    display: block;
     margin: 0 auto;
 }
-  
+
 .center-element {
     position: absolute;
     left: 50%;
@@ -113,7 +112,7 @@ h5 {
 h6 {
     font-size: 20px;
 }
-  
+
 .btn {
     position: relative;
     font-size: 14px;
@@ -180,7 +179,7 @@ button.vivid_red:hover {
 }
 
 button.royal_azure:hover {
-    background-color: var(--blue_ryb);   
+    background-color: var(--blue_ryb);
 }
 
 button.caribbean_green:hover {
@@ -294,7 +293,7 @@ span {
 }
 
 .right_content {
-    margin-left: auto; 
+    margin-left: auto;
     margin-right: 0;
 }
 
@@ -401,7 +400,6 @@ span {
     cursor: text;
     height: 25px;
     width: 200px;
-    font-family: 'Nunito';
     padding-left: 30px;
     background: white url("http://cssdeck.com/uploads/media/items/5/5JuDgOa.png") 10px 7px no-repeat;
     border: none;
@@ -723,7 +721,7 @@ input[type="password"].form-input {
     text-align: left;
     margin-bottom: .2rem;
 }
-  
+
   .form-element span {
     font-size: 17px;
     font-family: Arial, Helvetica, sans-serif;
@@ -818,16 +816,16 @@ input[type="password"].form-input {
 .message {
     font-size: 15px;
 }
-  
+
 .error-block .message {
     color: #5A0001;
 }
-  
+
 .success-block {
     border: 1px solid var(--go_green);
     background-color: rgba(0, 204, 102, 0.2);
 }
-  
+
 .success-block .message {
     color: #14CC14;
 }
@@ -840,25 +838,25 @@ input[type="password"].form-input {
 .warning-block .message {
     color: #F2BC1B;
 }
-  
+
 /* Animations */
 
 .right_to_left {
     animation: right_to_left 1s;
 }
-  
+
 .left_to_right {
     animation: left_to_right 1s;
 }
-  
+
 .invisible {
     display: none;
 }
-  
+
 .fade {
     animation: fade 1s;
 }
-  
+
 .loading {
     border: 10px solid #F3F3F3;
     border-top: 10px solid #3498DB;
@@ -867,58 +865,58 @@ input[type="password"].form-input {
     height: 150px;
     animation: spin 2s linear infinite;
 }
-  
+
 @keyframes down_to_up {
     0% {
       margin-top: 30%;
       opacity: 0;
     }
-  
+
     100.00% {
       margin-top: 0%;
       opacity: 1;
     }
 }
-  
+
 @keyframes right_to_left {
     0% {
       margin-left: 10%;
       opacity: 0;
     }
-  
+
     100% {
       margin-left: initial;
       opacity: 1;
     }
 }
-  
+
 @keyframes left_to_right {
     0% {
       margin-right: 10%;
       opacity: 0;
     }
-  
+
     100% {
       margin-right: initial;
       opacity: 1;
     }
 }
-  
+
 @keyframes fade {
     0% {
       opacity: 0;
     }
-  
+
     100% {
       opacity: 1;
     }
 }
-  
+
 @keyframes spin {
     0% {
       transform: rotate(0deg);
     }
-  
+
     100% {
       transform: rotate(360deg);
     }
@@ -955,12 +953,12 @@ input[type="password"].form-input {
         position: relative;
         display: block;
     }
-    
+
     .menu-options li {
         display: block;
         width: 100%;
     }
-    
+
     .menu-options li > ul {
         position: static;
     }
@@ -976,23 +974,23 @@ input[type="password"].form-input {
     h1 {
         font-size: 35px;
     }
-    
+
     h2 {
         font-size: 32px;
     }
-    
+
     h3 {
         font-size: 30px;
     }
-    
+
     h4 {
         font-size: 27px;
     }
-    
+
     h5 {
         font-size: 25px;
     }
-    
+
     h6 {
         font-size: 20px;
     }

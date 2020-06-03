@@ -19,6 +19,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { PersonService } from './services/person.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
+import { PeopleFilterPipe } from './pipes/people-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { MaterialModule } from './material.module';
     PeopleHistoryComponent,
     PersonDetailComponent,
     PersonSearchComponent,
-    PersonResgisterComponent
+    PersonResgisterComponent,
+    PeopleFilterPipe
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
