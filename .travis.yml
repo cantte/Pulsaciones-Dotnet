@@ -1,23 +1,8 @@
-name: .NET Core
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+language: csharp
+solution: Pulsaciones-dotnetV2.sln
 
-jobs:
-  build:
-
-    runs-on: ubuntu-lastest
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-verion: 3.1.101
-    - name: Install dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
+mono: none
+dotnet: 3.1.101
+script: 
+  - dotnet restore
