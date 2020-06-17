@@ -1,116 +1,115 @@
 h1 {
-    font-family: 'Karla', sans-serif;
+  font-family: "Karla", sans-serif;
 }
 
 table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    margin-bottom: 15px;
-    border-radius: 5px;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  border-radius: 5px;
 }
 
 th {
-    height: 33px;
-    font-size: 23px;
-    text-align:  left;
-    padding-left: 7px;
-    font-weight: 50;
+  height: 33px;
+  font-size: 23px;
+  text-align: left;
+  padding-left: 7px;
+  font-weight: 50;
 }
 
 td {
-    vertical-align: middle;
-    padding-left: 7px;
-    height: 25px;
-    font-size: 21px;
-    font-family: 'Barlow', sans-serif;
+  vertical-align: middle;
+  padding-left: 7px;
+  height: 25px;
+  font-size: 21px;
+  font-family: "Barlow", sans-serif;
 }
 
 a {
-    text-decoration: none;
-    color: black;
+  text-decoration: none;
+  color: black;
 }
 
 tr:hover {
-    background-color: #E0E0E0;
-    border-radius: 5px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
 }
 
 tr:hover td:first-child {
-    border-radius: 5px 0px 0px 5px;
+  border-radius: 5px 0px 0px 5px;
 }
 
 tr:hover td:last-child {
-    border-radius: 0px 5px 5px 0px;
+  border-radius: 0px 5px 5px 0px;
 }
 
 tr:nth-child(even):hover {
-    background-color: #E0E0E0;
-    border-radius: 5px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
 }
 
 tr:nth-child(even) {
-    background-color: #F2F2F2;
+  background-color: #f2f2f2;
 }
 
 .table-header th:first-child {
-    border-radius: 5px 0px 0px 5px;
+  border-radius: 5px 0px 0px 5px;
 }
 
 .table-header th:last-child {
-    border-radius: 0px 5px 5px 0px;
+  border-radius: 0px 5px 5px 0px;
 }
 
 .table-header th {
-    background-color: #4CAF50;
-    color: white;
+  background-color: #4caf50;
+  color: white;
 }
 
 .table-header th:first-child {
-    border-radius: 5px 0px 0px 5px;
+  border-radius: 5px 0px 0px 5px;
 }
 
 .table-header th:last-child {
-    border-radius: 0px 5px 5px 0px;
+  border-radius: 0px 5px 5px 0px;
 }
 
-
 .msg-empty-table {
-    text-align: center;
-    font-size: 20px;
-    width: 100%;
-    padding: 5px;
+  text-align: center;
+  font-size: 20px;
+  width: 100%;
+  padding: 5px;
 }
 
 .red-button {
-    border: 1.5px solid #B40000;
-    background: rgba(255, 0, 0, 0.95);
-    color: white;
-    cursor: pointer;
+  border: 1.5px solid #b40000;
+  background: rgba(255, 0, 0, 0.95);
+  color: white;
+  cursor: pointer;
 }
 
 .red-button:hover {
-    background-color: rgba(255, 0, 0, 0.85);
-    color: #02111B;
+  background-color: rgba(255, 0, 0, 0.85);
+  color: #02111b;
 }
 
 .red-light-button {
-    font-size: 15px;
-    border: 1.5px solid red;
-    background: white;
-    color: red;
-    cursor: pointer;
+  font-size: 15px;
+  border: 1.5px solid red;
+  background: white;
+  color: red;
+  cursor: pointer;
 }
 
 .red-light-button:hover {
-    background: rgb(250, 0, 0);
-    color: white;
-    border: 1.5px solid #B40000;
+  background: rgb(250, 0, 0);
+  color: white;
+  border: 1.5px solid #b40000;
 }
 
 .person-cell {
-    cursor: pointer;
-    border-radius: 5px;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 .filter-input {

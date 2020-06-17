@@ -1,82 +1,130 @@
-<h1>{{title}}</h1>
+<h1>{{ title }}</h1>
 <div class="center-content">
-    <mat-card style="width: 85%;">
-        <form [formGroup]="personForm" (ngSubmit)="onSubmit()" style="width: 100%"> 
-            <div class="center-block-content" style="width: 100%;">
-                <div class="form-element">
-                    <mat-form-field style="height: 35px;">
-                        <mat-label>Id</mat-label>
-                        <input type="text" matInput placeholder="Your id" formControlName="personId">
-                        <mat-hint>Please enter your id</mat-hint>
-                        <mat-error *ngIf="controls['personId'].hasError('required')">Your id is required.</mat-error>
-                        <mat-error *ngIf="!controls['personId'].hasError('required') && 
-                            controls['personId'].hasError('pattern')">
-                            Your id must be numeric.
-                        </mat-error>
-                        <mat-error *ngIf="!controls['personId'].hasError('required') && 
-                            controls['personId'].hasError('minlength')">
-                            Your id must have at least 5 numeric characters.
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-                <div class="form-element">
-                    <mat-form-field style="height: 35px;">
-                        <mat-label>Name</mat-label>
-                        <input type="text" matInput placeholder="Your name" formControlName="personName">
-                        <mat-hint>Please enter your complete name</mat-hint>
-                        <mat-error *ngIf="controls['personName'].hasError('required')">
-                          Your name is required.
-                        </mat-error>
-                        <mat-error *ngIf="controls['personName'].hasError('minlength')">
-                            Your name must have at least 5 characters.
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-                <div class="form-element">
-                    <mat-form-field style="height: 35px;">
-                        <mat-label>Age</mat-label>
-                        <input type="number" matInput name="age" id="age" placeholder="Your age" formControlName="personAge">
-                        <mat-hint>Please enter your age. Values between 1-100</mat-hint>
-                        <mat-error *ngIf="controls['personAge'].hasError('required')">
-                            Your age is required
-                        </mat-error>
-                        <mat-error *ngIf="controls['personAge'].hasError('min')">
-                            Age must be greater than or equal to 1
-                        </mat-error>
-                        <mat-error *ngIf="controls['personAge'].hasError('max')">
-                            Age must be less than 100
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-                <div class="form-element">
-                    <label>Select a sex</label>
-                    <mat-radio-group aria-label="Select a sex" formControlName="personSex">
-                        <mat-radio-button value="F">
-                            Female
-                        </mat-radio-button>
-                        <mat-radio-button value="M">
-                            Male
-                        </mat-radio-button>
-                    </mat-radio-group>
-                </div>
-                <div *ngIf="pulsations">
-                    <span>Pulsations: {{ pulsations }}</span>
-                </div>
-            </div>
-            <div class="center-content">
-                <button type="submit" mat-flat-button class="royal_azure" style="margin-right: 5px;" [textContent]="(updateForm == true) ? 'Update person' : 'Save person'"></button>
-                <button type="button" mat-flat-button class="royal_azure" (click)="calculatePulsations()">Calculate Pulsations</button>
-            </div>
-        </form>
-        <div class="center-content" style="margin-top: 10px;">
-            <div class="information-block error-block" *ngIf="invalidForm">
-                <span class="message">
-                    Please fill required fields.
-                </span>
-            </div>
-            <div class="information-block" [class.warning-block]="serverResponse.success == false" [class.success-block]="serverResponse.success == true" *ngIf="serverResponse">
-                <span class="message">{{ serverResponse.message }}</span>
-            </div>
+  <mat-card style="width: 85%;">
+    <form [formGroup]="personForm" (ngSubmit)="onSubmit()" style="width: 100%;">
+      <div class="center-block-content" style="width: 100%;">
+        <div class="form-element">
+          <mat-form-field style="height: 35px;">
+            <mat-label>Id</mat-label>
+            <input
+              type="text"
+              matInput
+              placeholder="Your id"
+              formControlName="personId"
+            />
+            <mat-hint>Please enter your id</mat-hint>
+            <mat-error *ngIf="controls['personId'].hasError('required')"
+              >Your id is required.</mat-error
+            >
+            <mat-error
+              *ngIf="
+                !controls['personId'].hasError('required') &&
+                controls['personId'].hasError('pattern')
+              "
+            >
+              Your id must be numeric.
+            </mat-error>
+            <mat-error
+              *ngIf="
+                !controls['personId'].hasError('required') &&
+                controls['personId'].hasError('minlength')
+              "
+            >
+              Your id must have at least 5 numeric characters.
+            </mat-error>
+          </mat-form-field>
         </div>
-    </mat-card>
+        <div class="form-element">
+          <mat-form-field style="height: 35px;">
+            <mat-label>Name</mat-label>
+            <input
+              type="text"
+              matInput
+              placeholder="Your name"
+              formControlName="personName"
+            />
+            <mat-hint>Please enter your complete name</mat-hint>
+            <mat-error *ngIf="controls['personName'].hasError('required')">
+              Your name is required.
+            </mat-error>
+            <mat-error *ngIf="controls['personName'].hasError('minlength')">
+              Your name must have at least 5 characters.
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-element">
+          <mat-form-field style="height: 35px;">
+            <mat-label>Age</mat-label>
+            <input
+              type="number"
+              matInput
+              name="age"
+              id="age"
+              placeholder="Your age"
+              formControlName="personAge"
+            />
+            <mat-hint>Please enter your age. Values between 1-100</mat-hint>
+            <mat-error *ngIf="controls['personAge'].hasError('required')">
+              Your age is required
+            </mat-error>
+            <mat-error *ngIf="controls['personAge'].hasError('min')">
+              Age must be greater than or equal to 1
+            </mat-error>
+            <mat-error *ngIf="controls['personAge'].hasError('max')">
+              Age must be less than 100
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-element">
+          <label>Select a sex</label>
+          <mat-radio-group
+            aria-label="Select a sex"
+            formControlName="personSex"
+          >
+            <mat-radio-button value="F">
+              Female
+            </mat-radio-button>
+            <mat-radio-button value="M">
+              Male
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div *ngIf="pulsations">
+          <span>Pulsations: {{ pulsations }}</span>
+        </div>
+      </div>
+      <div class="center-content">
+        <button
+          type="submit"
+          mat-flat-button
+          class="royal_azure"
+          style="margin-right: 5px;"
+          [textContent]="updateForm == true ? 'Update person' : 'Save person'"
+        ></button>
+        <button
+          type="button"
+          mat-flat-button
+          class="royal_azure"
+          (click)="calculatePulsations()"
+        >
+          Calculate Pulsations
+        </button>
+      </div>
+    </form>
+    <div class="center-content" style="margin-top: 10px;">
+      <div class="information-block error-block" *ngIf="invalidForm">
+        <span class="message">
+          Please fill required fields.
+        </span>
+      </div>
+      <div
+        class="information-block"
+        [class.warning-block]="serverResponse.success == false"
+        [class.success-block]="serverResponse.success == true"
+        *ngIf="serverResponse"
+      >
+        <span class="message">{{ serverResponse.message }}</span>
+      </div>
+    </div>
+  </mat-card>
 </div>
