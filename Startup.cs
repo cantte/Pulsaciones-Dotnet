@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Pulsaciones_dotnetV2.Data;
+using Pulsaciones_dotnetV2.Hubs;
 using Pulsaciones_dotnetV2.Models;
 using System;
 
@@ -39,6 +40,8 @@ namespace Pulsaciones_dotnetV2
                 .AddIdentityServerJwt();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddCors();
+            services.AddSignalR();
 
             services.AddSwaggerGen(s =>
             {
@@ -50,7 +53,7 @@ namespace Pulsaciones_dotnetV2
                     TermsOfService = new Uri("https://cla.dotnetfoundation.org/"),
                     Contact = new OpenApiContact
                     {
-                        Name = "Carlos Andrés Pavajeau Max",
+                        Name = "Carlos Andrï¿½s Pavajeau Max",
                         Email = string.Empty,
                         Url = new Uri("https://github.com/cantte/")
                     },
@@ -101,6 +104,12 @@ namespace Pulsaciones_dotnetV2
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+                endpoints.MapHub<SignalHub>("/signalHub");
+            });
+
+            app.UseCors(c =>
+            {
+                c.AllowAnyOrigin().AllowAnyMethod().AllowAnyMethod();
             });
 
             app.UseSwagger();

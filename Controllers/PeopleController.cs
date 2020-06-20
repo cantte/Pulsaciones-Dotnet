@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
 using Pulsaciones_dotnetV2.Data;
+using Pulsaciones_dotnetV2.Hubs;
 using Pulsaciones_dotnetV2.Models;
 using Pulsaciones_dotnetV2.Models.EditModels;
 using Pulsaciones_dotnetV2.Models.InputModels;
@@ -8,6 +11,7 @@ using Pulsaciones_dotnetV2.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Pulsaciones_dotnetV2.Controllers
 {
@@ -16,17 +20,17 @@ namespace Pulsaciones_dotnetV2.Controllers
     public class PeopleController : Controller
     {
         private readonly ApplicationDbContext dbContext;
+        private readonly IHubContext<SignalHub> _hubContext;
 
-        public PeopleController(ApplicationDbContext context)
+        public PeopleController(ApplicationDbContext context, IHubContext<SignalHub> hubContext)
         {
             dbContext = context;
+            _hubContext = hubContext;
         }
 
-        [HttpPost("[action]")]
-        public ServerResponse Insert([FromBody] PersonInputModel model)
+        [HttpPost]
+        public async Task<ActionResult<PersonViewModel>> Post([FromBody] PersonInputModel model)
         {
-            ServerResponse serverResponse = new ServerResponse();
-
             try
             {
                 Person person = new Person()
@@ -40,23 +44,21 @@ namespace Pulsaciones_dotnetV2.Controllers
                 dbContext.People.Add(person);
                 dbContext.SaveChanges();
 
-                serverResponse.Success = true;
-                serverResponse.Message = "Person save successfull.";
+
+                await _hubContext.Clients.All.SendAsync("New person", person);
+                return new PersonViewModel(person);
             }
             catch (Exception)
             {
-                serverResponse.Success = false;
-                serverResponse.Message = "Person already register.";
+                return Conflict();
             }
-
-            return serverResponse;
         }
 
-        [HttpGet("[action]")]
-        public IEnumerable<PersonViewModel> People()
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<PersonViewModel>>> People()
         {
-            List<PersonViewModel> people = (from p in dbContext.People
-                                            select new PersonViewModel(p)).ToList();
+            List<PersonViewModel> people = await (from p in dbContext.People
+                                                  select new PersonViewModel(p)).ToListAsync();
 
 
 
@@ -73,7 +75,7 @@ namespace Pulsaciones_dotnetV2.Controllers
             return people;
         }
 
-        [HttpGet("[action]/{personId}")]
+        [HttpGet("{personId}")]
         public PersonViewModel Person(string personId)
         {
             PersonViewModel person;
@@ -92,7 +94,7 @@ namespace Pulsaciones_dotnetV2.Controllers
             return person;
         }
 
-        [HttpDelete("[action]/{personId}")]
+        [HttpDelete("{personId}")]
         public ServerResponse Delete(string personId)
         {
             ServerResponse serverResponse = new ServerResponse();
@@ -117,7 +119,7 @@ namespace Pulsaciones_dotnetV2.Controllers
             return serverResponse;
         }
 
-        [HttpPut("[action]/{personId}")]
+        [HttpPut("{personId}")]
         public ServerResponse Update(string personId, [FromBody] PersonEditModel model)
         {
             ServerResponse serverResponse = new ServerResponse();
